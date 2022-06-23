@@ -8,7 +8,7 @@ export default function TextInputPerso(props) {
     return (
       <View style={styles.searchSection}>
           <Icon style={styles.searchIcon} name={props.icon} size={20} color="#000"/>
-          <TextInput placeholder={props.placeholder}  style={styles.input} secureTextEntry={passwordVisible}/>
+          <TextInput placeholder={props.placeholder}  style={styles.input} secureTextEntry={passwordVisible} keyboardType={props.keyboardType}/>
           <Icon style={styles.searchIcon} name={passwordVisible ? "visibility-off" : "visibility"} onPress={() => setPasswordVisible(!passwordVisible)} />
       </View>
         ); 
@@ -17,7 +17,7 @@ export default function TextInputPerso(props) {
       return (
         <View style={styles.searchSection}>
             <Icon style={styles.searchIcon} name={props.icon} size={20} color="#000"/>
-            <TextInput placeholder={props.placeholder}  style={styles.input}/>
+            <TextInput placeholder={props.placeholder}  style={styles.input}  keyboardType={props.keyboardType}/>
         </View>
           ); 
   }

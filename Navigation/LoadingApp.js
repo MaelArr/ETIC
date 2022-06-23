@@ -1,6 +1,5 @@
 import React from "react";
 import {ActivityIndicator, View, TouchableOpacity } from "react-native";
-import styles from "../StyleSheets/StylesDetailsScreen";
 
 const LoadingApp = ({navigation}, props) => {
   return (

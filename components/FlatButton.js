@@ -1,31 +1,44 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity, Text, View } from 'react-native';
  
-export default function FlatButton({ text, onPress, isGoogle }) {
-  if(isGoogle){
-      return (
-          <TouchableOpacity style={styles.element} onPress={onPress}>
-              <View style={styles.button}>
-                  <Image style={styles.image} source={require('../images/google.png')} />
-                  <Text style={styles.buttonText}>{text}</Text>
-              </View>
-          </TouchableOpacity>
-      );
+export default function FlatButton(props) {
+  return (
+    <TouchableOpacity style={styles.element} onPress={props.onPress}>
+        <View style={[styles.button, {backgroundColor:props.color}]}>
+          {image(props)}
+          <View style={{flexDirection: "column"}}>
+            <Text style={[styles.buttonText, {color: props.fontColor}]}>{props.text}</Text>
+            {littleText(props)}
+          </View>
+        </View>
+    </TouchableOpacity>
+  );
+}
+
+function littleText(props) {
+  console.log(props);
+  if(props.littleText == null){
+    return null;
   }else{
-    return (
-        <TouchableOpacity style={styles.element} onPress={onPress}>
-            <View style={styles.button}>
-                <Image style={styles.image} source={require('../images/apple.png')} />
-                <Text style={styles.buttonText}>{text}</Text>
-            </View>
-        </TouchableOpacity>
-    );
+    return(
+    <Text style={[styles.buttonLittleText, {color: props.fontColor}]}>{props.littleText}</Text>
+    ); 
+  }
+}
+
+function image(props) {
+  console.log(props);
+  if(props.source == null){
+    return null;
+  }else{
+    return(
+    <Image style={styles.image} source={props.source} />    ); 
   }
 }
  
 const styles = StyleSheet.create({
   image: {
-    marginRight: 30
+    marginRight: 40
   },
     element:{
       margin: 15,
@@ -40,13 +53,15 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 14,
         paddingHorizontal: 10,
-        backgroundColor: '#FFFFFF',
     },
     buttonText: {
-        color: 'black',
         fontWeight: 'bold',
         textTransform: 'uppercase',
         fontSize: 16,
         textAlign: 'center',
+    },
+    buttonLittleText: {
+      fontSize: 12,
+      textAlign: 'center',
     }
 });

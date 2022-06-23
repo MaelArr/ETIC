@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, View, TouchableOpacity} from "react-native";
-import styles from "../StyleSheets/StylesHomeScreen";
+import styles from "../StyleSheets/StylesLogInScreen";
 
 const Travmeejoy = ({navigation}, props) => {
   return (

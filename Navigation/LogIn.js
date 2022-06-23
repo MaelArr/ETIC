@@ -1,6 +1,5 @@
 import React from "react";
-import { Image, View, Text, TextInput, Pressable, Button, TouchableOpacity} from "react-native";
-import styles from "../StyleSheets/StylesHomeScreen";
+import { Image, View, Text, Pressable, Button} from "react-native";
 import FlatButton from "../components/FlatButton";
 import TextInputPerso from "../components/TextInputPerso";
 
@@ -10,7 +9,7 @@ const LogIn = ({navigation}, props) => {
 
         <Image source={require('../images/Travmeejoy.png')} />
 
-        <Text>Bienvenue</Text>
+        <Text>BienvenueLogIn</Text>
 
         <View style={{alignItems: 'center', width:'100%'}}>
             <TextInputPerso placeholder="E-mail, pseudo ou téléphone" icon="mail"/>
@@ -32,13 +31,15 @@ const LogIn = ({navigation}, props) => {
               color="#595959"
             />
             <Text>ou</Text>
-            <FlatButton text="Continuer avec Google" onPress={() => navigation.navigate("")} isGoogle={true}/>
-            <FlatButton text="Continuer avec Apple"  onPress={() => navigation.navigate("")} isGoogle={false}/>
+            <FlatButton text="Continuer avec Google" onPress={() => navigation.navigate("")} source={require("../images/google.png")} color="#FFFFFF"
+            fontColor="black"/>
+            <FlatButton text="Continuer avec Apple"  onPress={() => navigation.navigate("")} source={require("../images/apple.png")} color="#FFFFFF"
+            fontColor="black"/>
         </View>
         
         <View  style={{alignItems: 'center', width:'100%'}}>
           <Text>Pas encore de compte ?</Text>
-          <Pressable onPress={() => navigation.navigate("")}>
+          <Pressable onPress={() => navigation.navigate("SignIn")}>
             <Text>Inscription</Text>
           </Pressable>
         </View>
