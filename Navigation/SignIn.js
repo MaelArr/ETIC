@@ -6,7 +6,6 @@ import { useState } from "react";
 import { Icon } from "@rneui/themed";
 
 const LogIn = ({navigation}, props) => {
-  const [inputValue, setInputValue] = useState("Example text");
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
 
@@ -44,7 +43,7 @@ const LogIn = ({navigation}, props) => {
 
         <View style={{alignItems: 'center', width:'100%', margin: 15}}>
             <Button
-              onPress={() => navigation.navigate("")}
+              onPress={() => navigation.navigate("CreationProfil1")}
               title="Continuer" 
               color="#595959"
             />
