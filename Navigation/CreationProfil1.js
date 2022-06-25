@@ -1,27 +1,73 @@
 import React from "react";
-import { Image, View, Text, Pressable, Button, TextInput} from "react-native";
-import FlatButton from "../components/FlatButton";
-import TextInputPerso from "../components/TextInputPerso";
+import { Image, View, Button} from "react-native";
 import { useState } from "react";
 import { Icon } from "@rneui/themed";
+import * as ImagePicker from 'expo-image-picker';
+import PickerSelect from 'react-native-picker-select';
+import DatePicker from "react-native-date-picker";
 
 const LogIn = ({navigation}, props) => {
-  var photo = "";
+  const [image, setImage] = useState(null);
+  const [date, setDate] = useState(new Date());
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
 
         <Image source={require('../images/Travmeejoy.png')} />
 
         <View style={{alignItems: 'center', width:'100%', margin: 15}}>
-            {photoProfil(photo)}
-            <Icon style={{marginLeft: 10}} type="material" name="photo-camera" color="#FF1A6C" onPress={() => navigation.navigate("LogIn")}/>
+              {photoProfil(image)}
+              <View style={{zIndex: 1, position: "relative", top: -40, left: 60, backgroundColor: "#FFFFFF", width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center"}}>
+                <Icon style={{position: "relative"}} type="material" name="photo-camera" color="#FF1A6C" onPress={pickImage}/>
+              </View>
+            
         </View>
         
         <View style={{alignItems: 'center', width:'100%'}}>
-            <TextInputPerso placeholder="Date de naissance dd/mm/yyyy"/>
-            <TextInputPerso placeholder="Genre" keyboardType="email-address"/>
-            <TextInputPerso placeholder="Pays"/> 
-            <TextInputPerso placeholder="langue" keyboardType="numeric"/>
+
+            <PickerSelect
+                 placeholder={{ label: "Genre", value: null }}
+                 onValueChange={(value) => console.log(value)}
+                 items={[
+                     { label: "Homme", value: "H" },
+                     { label: "Femme", value: "F" },
+                     { label: "Autre", value: "A" }
+                 ]}
+             />
+             <PickerSelect
+                 placeholder={{ label: "Pays", value: null }}
+                 onValueChange={(value) => console.log(value)}
+                 items={[
+                     { label: "France", value: "Fr" },
+                     { label: "Espagne", value: "Esp" },
+                     { label: "Italie", value: "It" }
+                 ]}
+             /> 
+            <PickerSelect
+                 placeholder={{ label: "Langue d'origine", value: null }}
+                 onValueChange={(value) => console.log(value)}
+                 items={[
+                     { label: "Français", value: "Fr" },
+                     { label: "Espagnol", value: "Esp" },
+                     { label: "Italien", value: "It" }
+                 ]}
+             /> 
         </View>    
 
         <View style={{alignItems: 'center', width:'100%', margin: 15}}>
@@ -35,8 +81,12 @@ const LogIn = ({navigation}, props) => {
   );
 };
 
-function photoProfil(){
-  return <View style={{backgroundColor: "#595959", width: 100, height: 100, borderRadius: 50}}></View>
+function photoProfil(image){
+  if(image){
+    return <Image source={{ uri: image }} style={{backgroundColor: "#595959", width: 200, height: 200, borderRadius: 100}} />
+  }else{
+    return <View style={{backgroundColor: "#595959", width: 200, height: 200, borderRadius: 100}}></View>
+  }
 }
 
 export default LogIn;
